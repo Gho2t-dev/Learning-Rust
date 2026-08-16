@@ -8,7 +8,8 @@ fn main() { // main function that runs as soon as the programm is executed
 
     loop {
 
-        println!("The secret number is: {secret_number}");
+        //print the secret number (only for debuging :) )
+        //println!("The secret number is: {secret_number}");
 
         println!("Please input your guess.");
 
@@ -30,7 +31,12 @@ fn main() { // main function that runs as soon as the programm is executed
 
         println!("You guessed: {guess}");
 
-        let guess: u32 = guess.trim().parse().expect("Please type in a number between 1 and 100");
+        // converts guess to u32, trims whitespace(eg \n) parses(converts to u32) and OLD (expect(to catch errors))
+        let guess: u32 = match guess.trim().parse(){ // Another match here handling result that parse gives us enum 
+            //  OK by passing num and err with just continuing the loop
+            Ok(num) => num,
+            Err(_) => continue, //The underscore, _, is a catch-all value handling ALL kinds of errors
+        };
 
         // .cmp() compares and returns Ordering enum with states less greater and equal
         match guess.cmp(&secret_number) {   // match expression is made up of arms. An arm consists of a pattern to match against, and the code that should be run if the value given to match fits that arm’s pattern.
@@ -44,3 +50,9 @@ fn main() { // main function that runs as soon as the programm is executed
     }
 }
 
+//Summary from the book
+//Summary
+//This project was a hands-on way to introduce you to many new Rust concepts: let, match, functions, the use of external crates, and more. 
+//In the next few chapters, you’ll learn about these concepts in more detail. 
+//Chapter 3 covers concepts that most programming languages have, such as variables, data types, and functions, and shows how to use them in Rust. 
+//Chapter 4 explores ownership, a feature that makes Rust different from other languages. Chapter 5 discusses structs and method syntax, and Chapter 6 explains how enums work.
