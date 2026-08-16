@@ -1,7 +1,12 @@
 use std::io; //The io library comes from the standard library, known as std
+use rand::Rng; //
 
 fn main() { // main function that runs as soon as the programm is executed
     println!("Guess the number!"); // print line macro 
+
+    let secret_number = rand::thread_rng().gen_range(1..=100);
+
+    println!("The secret number is: {secret_number}");
 
     println!("Please input your guess.");
 
@@ -24,4 +29,3 @@ fn main() { // main function that runs as soon as the programm is executed
     println!("You guessed: {guess}");
 }
 
-// TODO rand num generation and game logic
