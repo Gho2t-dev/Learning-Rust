@@ -20,7 +20,7 @@ error[E0284]: type annotations needed
   = note: cannot satisfy `<_ as FromStr>::Err == _`
 help: consider giving `guess` an explicit type
   |
-2 |     let guess: /* Type */ = "42".parse().expect("Not a number!");
+2 |     let guess: /*Type*/ = "42".parse().expect("Not a number!");
   |              ++++++++++++
 
 For more information about this error, try `rustc --explain E0284`.
@@ -30,13 +30,88 @@ Integers:
 
 Table 3-1: Integer Types in Rust
 
-Length	Signed	Unsigned
-8-bit	i8	u8
-16-bit	i16	u16
-32-bit	i32	u32
-64-bit	i64	u64
-128-bit	i128	u128
-Architecture-dependent	isize	usize
+Length Signed Unsigned
+8-bit i8 u8
+16-bit i16 u16
+32-bit i32 u32
+64-bit i64 u64
+128-bit i128 u128
+Architecture-dependent isize usize
 
 Each signed variant can store numbers from −(2n − 1) to 2n − 1 − 1 inclusive, where n is the number of bits that variant uses. So, an i8 can store numbers from −(27) to 27 − 1, which equals −128 to 127. Unsigned variants can store numbers from 0 to 2n − 1, so a u8 can store numbers from 0 to 28 − 1, which equals 0 to 255.
+
+FOR GENERAL USE i32 is the default
+
+if you "overflow" your numbers for debug it results in panic but for release it wraps around and starts at 0 again
+For example relaseing let x: u8 = 256 will result in x being 0 for release and not compile with panic at debug compile time
+
+Floating point numbers:
+there are 2 types: f32 and f64. of which f64 is the default as its about as fast as f32 on modern cpus and way more acurate.
+
+
+Basic Mathematical operations
+
+fn main() {
+    // addition
+    let sum = 5 + 10;
+
+    // subtraction
+    let difference = 95.5 - 4.3;
+
+    // multiplication
+    let product = 4 * 30;
+
+    // division
+    let quotient = 56.7 / 32.2;
+    let truncated = -5 / 3; // Results in -1
+
+    // remainder
+    let remainder = 43 % 5;
+}
+
+Char types are seen in the following example:
+fn main() {
+    let c = 'z';
+    let z: char = 'ℤ'; // with explicit type annotation
+    let heart_eyed_cat = '😻';
+}
+Note that we specify char literals with single quotation marks, as opposed to string literals, which use double quotation marks.
+
+Compound types:
+Compound types can group multiple values into one type. Rust has two primitive compound types: tuples and arrays.
+
+Tuples:
+A tuple is a general way of grouping together a number of values with a variety of types into one compound type. Tuples have a fixed length: Once declared, they cannot grow or shrink in size.
+fn main() {
+    let tup: (i32, f64, u8) = (500, 6.4, 1);
+}
+type annotations are optional in this example
+
+two variants to access data inside a tuple:
+Nr1 mapping the values
+fn main() {
+    let tup = (500, 6.4, 1);
+
+    let (x, y, z) = tup;
+
+    println!("The value of y is: {y}");
+}
+
+Nr2 . annotation
+fn main() {
+    let x: (i32, f64, u8) = (500, 6.4, 1);
+
+    let five_hundred = x.0;
+
+    let six_point_four = x.1;
+
+    let one = x.2;
+}
+
+Arrays:
+Unlike a tuple, every element of an array must have the same type. Unlike arrays in some other languages, arrays in Rust have a fixed length.
+
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+}
 
