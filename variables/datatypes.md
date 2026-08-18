@@ -115,3 +115,40 @@ fn main() {
     let a = [1, 2, 3, 4, 5];
 }
 
+If you are unsure if you should use an array or a vector you should use a vector.
+arrays live on the stack and vectors on the heap? more on that later
+
+Easy Rule to Remember
+
+Array = Many of the same thing
+
+let temperatures = [22, 24, 21, 23];
+
+Tuple = A group of related things
+
+let employee = ("Fabian", 1234, true);
+
+A good analogy:
+
+Array = Egg carton containing only eggs 🥚🥚🥚🥚
+Tuple = A lunch box containing a sandwich, an apple, and a drink 🥪🍎🥤
+
+You write an array’s type using square brackets with the type of each element, a semicolon, and then the number of elements in the array, like so:
+
+let a: [i32; 5] = [1, 2, 3, 4, 5];
+Here, i32 is the type of each element. After the semicolon, the number 5 indicates the array contains five elements.
+
+You can also initialize an array to contain the same value for each element by specifying the initial value, followed by a semicolon, and then the length of the array in square brackets, as shown here:
+
+let a = [3; 5];
+
+array elemt access
+
+An array is a single chunk of memory of a known, fixed size that can be allocated on the stack. You can access elements of an array using indexing, like this:
+
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+
+    let first = a[0];
+    let second = a[1];
+}
